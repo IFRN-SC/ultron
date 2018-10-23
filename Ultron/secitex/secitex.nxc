@@ -1,0 +1,34 @@
+#include "math.h"
+#include "var.h"
+#include "sala3.h"
+#include "conversao.h"
+#include "calibracao.h"
+#include "movimentos.h"
+#include "competicao.h"
+
+task main (){
+ 
+ SetSensorColorFull (S1);
+ SetSensorColorFull (S4);
+ SetSensorLowspeed  (S3);
+ SetSensorLowspeed  (S2);
+
+
+  while (true)
+  {      
+    TextOut(20,50, " David3 ");
+    TextOut(20,30, " iniciar  >");
+    TextOut(20,20, " calibrar <");
+   
+       if (ButtonPressed(BTN2, false))
+       {
+              iniciarCompeticao ();      
+              ClearScreen (); 
+       }
+       else if (ButtonPressed(BTN3, false))
+       {
+              calibrarRobo ();
+              ClearScreen (); 
+       }
+   }
+}
