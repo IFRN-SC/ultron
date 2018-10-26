@@ -60,10 +60,10 @@ void iniciarCompeticao ()
             }
         }
         else if (sensor_direito_preto && sensor_esquerdo_branco){
-            acionarMotores (55, -55);
+            acionarMotores (50, -50);
         }
         else if (sensor_direito_branco && sensor_esquerdo_preto) {
-            acionarMotores (-55, 55);
+            acionarMotores (-50, 50);
         }
           
         else {
