@@ -1,0 +1,10 @@
+task main ()
+{
+     DatalogGetTimesType args;
+     args.SyncTime = 10;
+     args.SyncTick = 20;
+     SysDatalogGetTimes(args);
+}
+
+
+
