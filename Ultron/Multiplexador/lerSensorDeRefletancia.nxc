@@ -1,0 +1,36 @@
+#include "HTSMUX-driver.h"
+
+task main (){
+
+   TextOut(50 ,LCD_LINE5, "RUTH FEIA!");
+   Wait (500);
+
+   SetSensor(S1, SENSOR_LOWSPEED);
+   
+   int porta1 = smuxSensorLegoUS(msensor_S1_1);
+   int porta2 = smuxSensorLegoUS(msensor_S1_2);
+   int porta3 = smuxSensorLegoUS(msensor_S1_3);
+   int porta4 = smuxSensorLegoUS(msensor_S1_4);
+
+
+    if (!HTSMUXscanPorts(S1)) {
+       TextOut(0, 0, "Scan failed, handle the error");
+       Wait (500);
+    }
+
+    ClearScreen ();
+
+     while (true){
+        TextOut(50 ,LCD_LINE5, "SONAR1: ", false);
+        NumOut (50,LCD_LINE5, porta1);
+
+        TextOut(50 ,LCD_LINE4, "SONAR2: ", false);
+        NumOut (50,LCD_LINE4, porta2);
+
+        TextOut(50 ,LCD_LINE3, "SONAR3: ", false);
+        NumOut (50,LCD_LINE3, porta3);
+
+        TextOut(50 ,LCD_LINE2, "SONAR4: ", false);
+        NumOut (50,LCD_LINE2, porta4);
+     }
+}
