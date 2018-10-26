@@ -1,0 +1,43 @@
+#define DISNTACIA_RAMPA 15
+#define DISNTACIA_OBST 7
+#define VERDE 3
+
+struct Calib {
+   float preto_direito, preto_esquerdo;
+   float branco_direito, branco_esquerdo;
+   float BRANCO_PRETO_DIR, BRANCO_PRETO_ESQ; 
+};
+
+// instânciar uma struct
+Calib c ;
+
+#include "conversao.h"
+#include "calibracao.h"
+#include "movimentos.h"
+#include "competicao.h"
+
+ 
+
+task main()
+{
+  SetSensorColorFull (S1);
+  SetSensorColorFull (S4);
+  SetSensorLowspeed (S2); 
+  SetSensorLowspeed (S3); 
+  
+      while (true){
+          TextOut(20,50, "-- EXPOTEC --");
+          TextOut(30,30, " iniciar  >");
+          TextOut(30,20, " calibrar <");
+          Off(OUT_ABC); Wait (200);
+ 
+          if(ButtonPressed(BTN3, false)) {
+             calibrarRobo ();
+             ClearScreen ();
+          }
+          else if(ButtonPressed(BTN2, false)){
+             Executar ();
+             ClearScreen ();
+          }
+    }
+}
