@@ -1,0 +1,9 @@
+task main()
+{
+   float volts = BatteryLevel() / 1000.0;
+
+   TextOut(0, LCD_LINE2,"Battery: ");
+   NumOut (40, LCD_LINE2,volts);
+
+   Wait(SEC_4);
+}
