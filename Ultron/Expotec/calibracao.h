@@ -10,7 +10,7 @@ void calibrarRobo ()
   while (true)
   {
     ClearScreen ();Wait(500);
-
+ 
     while (!(ButtonPressed(BTN2, false))){
       TextOut ( 0, 50, "todos branco");
       if (ButtonPressed (BTN4, false)){
@@ -69,4 +69,3 @@ void atualizar ()
   sensor_verde_dir = (Sensor (SENSOR_DIREITO) == VERDE);
   sensor_verde_esq = (Sensor (SENSOR_ESQUERDO) == VERDE);
 }
-

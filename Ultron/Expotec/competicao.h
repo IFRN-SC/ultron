@@ -10,6 +10,7 @@ void Executar (){
    {
        // atualiza os valores dos sensores         
        atualizar(); 
+       verBateria();
 
        if (SONAR_LAT <= DISTANCIA_RAMPA){
           subirRampa ();  
