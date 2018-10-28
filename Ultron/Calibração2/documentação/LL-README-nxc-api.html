@@ -1,0 +1,256 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>D:\lego\nxc\LL-README-nxc-api.txt.html</title>
+  <meta name="Generator" content="Vim/7.1">
+  <meta http-equiv="content-type"
+ content="text/html; charset=iso-8859-1">
+</head>
+<body bgcolor="#ffffff" text="#000000">
+<font face="monospace"><big><big><span style="font-weight: bold;">NXTLineLeader
+NXC API</span></big></big><br>
+<br>
+</font><font face="monospace">#defines for Read only register locations:<br>
+LL_READ_STEERING</font><font face="monospace"><br>
+LL_READ_AVERAGE<br>
+LL_READ_RESULT<br>
+<br>
+</font><font face="monospace">#defines for Read/Write register
+locations:</font><font face="monospace"><br>
+LL_VALUE_SETPOINT<br>
+LL_VALUE_KP<br>
+LL_VALUE_KI<br>
+LL_VALUE_KD<br>
+<br>
+LL_FACTOR_KP<br>
+LL_FACTOR_KI<br>
+LL_FACTOR_KD<br>
+<br>
+<big><span style="font-weight: bold;">int LL_ReadRaw_Calibrated (byte
+port, byte i2cAddr, byte &amp;returnValue[])<br>
+</span></big></font><font face="monospace">Functionality: Reads raw
+sensor values from LineLeader.<br>
+Parameters:<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte port: </span>Specify
+the NXT port this device is connected to.<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte i2cAddr: </span>I2C
+address of this device.<br>
+&nbsp; <span style="font-family: mon;"><span style="font-weight: bold;">byte
+&amp;returnValue[]</span></span><span style="font-weight: bold;">: <span
+ style="font-family: monospace;">array of 8 bytes to return the
+sensors' calibrated values</span></span>.<br>
+Returns:<br>
+&nbsp; 1 for success, 0 for failure.<br>
+</font><br>
+<font face="monospace"><big><span style="font-weight: bold;">int
+LL_ReadRaw_Uncalibrated (byte port, byte i2cAddr, int
+&amp;returnValue[])<br>
+</span></big></font><font face="monospace">
+Functionality: Reads raw sensor values from LineLeader.<br>
+Parameters:<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte port: </span>Specify
+the NXT port this device is connected to.<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte i2cAddr: </span>I2C
+address of this device.<br>
+&nbsp; <span style="font-family: mon;"><span style="font-weight: bold;">int
+&amp;returnValue[]</span></span><span style="font-weight: bold;">: <span
+ style="font-family: monospace;">array of 8 integers to return the
+sensors' uncalibrated values</span></span> (voltages).<br>
+Returns:<br>
+&nbsp; 1 for success, 0 for failure.<br>
+<br>
+</font><font face="monospace"><big><span style="font-weight: bold;">byte
+LL_Read (byte port, byte
+i2cAddr, int reg_to_read)</span></big><br>
+<br>
+Functionality: Reads any byte register from LineLeader.<br>
+Parameters:<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte port: </span>Specify
+the NXT port this device is connected to.<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte i2cAddr: </span>I2C
+address of this device.<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">int reg_to_read: </span>register
+address of the register to read.<br>
+Returns:<br>
+&nbsp;&nbsp;byte read from the sensor.<br>
+<br>
+<big style="font-weight: bold;">byte LL_ReadPIDFactor_KD(byte port,
+byte i2cAddr)</big><br>
+<br>
+Functionality: Reads KD factor from LineLeader<br>
+Parameters:<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte port: </span>Specify
+the NXT port this device is connected to.<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte i2cAddr: </span>I2C
+address of this device.<br>
+Returns:<br>
+&nbsp;&nbsp;byte read from the sensor.<br>
+<br>
+<big><span style="font-weight: bold;">byte LL_ReadPIDFactor_KI(byte
+port, byte i2cAddr)</span></big><br>
+<br>
+Functionality: Reads KI factor from LineLeader<br>
+Parameters:<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte port: </span>Specify
+the NXT port this device is connected to.<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte i2cAddr: </span>I2C
+address of this device.<br>
+Returns:<br>
+&nbsp;&nbsp;byte read from the sensor.<br>
+<br>
+<big><span style="font-weight: bold;">byte LL_ReadPIDFactor_KP(byte
+port, byte i2cAddr)</span></big><br>
+<br>
+Functionality: Reads KP factor from LineLeader<br>
+Parameters:<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte port: </span>Specify
+the NXT port this device is connected to.<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte i2cAddr: </span>I2C
+address of this device.<br>
+Returns:<br>
+&nbsp;&nbsp;byte read from the sensor.<br>
+<br>
+<big><span style="font-weight: bold;">byte LL_ReadSteering (byte port,
+byte i2cAddr)</span></big><br>
+<br>
+Functionality: Reads steering value computed by the LineLeader<br>
+Parameters:<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte port: </span>Specify
+the NXT port this device is connected to.<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte i2cAddr: </span>I2C
+address of this device.<br>
+Returns:<br>
+&nbsp;&nbsp;byte read from the sensor use this value to correct your
+motor power<br>
+&nbsp;&nbsp;to keep your robot on the line.<br>
+<br>
+<big><span style="font-weight: bold;">byte LL_WriteSetpoint(byte port,
+byte i2cAddr, byte data)</span></big><br>
+<br>
+Functionality: Write the Setpoint to LineLeader<br>
+Parameters:<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte port: </span>Specify
+the NXT port this device is connected to.<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte i2cAddr: </span>I2C
+address of this device.<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte data: </span>the
+setpoint value (between 0 and 80)<br>
+<br>
+<big><span style="font-weight: bold;">byte LL_Write_KD(byte port, byte
+i2cAddr, byte data, byte factor)</span></big><br>
+<br>
+Functionality: Write the KD and it's divisor factor to LineLeader<br>
+Parameters:<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte port: </span>Specify
+the NXT port this device is connected to.<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte i2cAddr: </span>I2C
+address of this device.<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte data: </span>the KD
+value (between 0 and 255)<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte factor: </span>the
+KD divisor factor (between 1 and 255)<br>
+<br>
+<big><span style="font-weight: bold;">byte LL_Write_KI(byte port, byte
+i2cAddr, byte data, byte factor)</span></big><br>
+<br>
+Functionality: Write the KI and it's divisor factor to LineLeader<br>
+Parameters:<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte port: </span>Specify
+the NXT port this device is connected to.<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte i2cAddr: </span>I2C
+address of this device.<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte data: </span>the KD
+value (between 0 and 255)<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte factor: </span>the
+KI divisor factor (between 1 and 255)<br>
+<big style="font-weight: bold;"><br>
+byte LL_Write_KP(byte port, byte i2cAddr, byte data, byte factor)</big><br>
+<br>
+Functionality: Write the KP and it's divisor factor to LineLeader<br>
+Parameters:<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte port: </span>Specify
+the NXT port this device is connected to.<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte i2cAddr: </span>I2C
+address of this device.<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte data: </span>the KD
+value (between 0 and 255)<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte factor: </span>the
+KP divisor factor (between 1 and 255)<br>
+<br>
+<big style="font-weight: bold;">int LL_InvertLineColorToWhite(byte
+port, byte addr)<br>
+</big><br>
+Functionality: This function inverts sensing for white line on dark
+background<br>
+Parameters:<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte port: </span>Specify
+the NXT port this device is connected to.<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte addr:</span> I2C
+address of this device.<br>
+<br>
+<big><span style="font-weight: bold;">int LL_ResetColorInversion(byte
+port, byte addr)</span><br style="font-weight: bold;">
+</big><br>
+Functionality: This function resets inversion (if any) to default
+(black line on light background)<br>
+Parameters:<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte port:</span> Specify
+the NXT port this device is connected to.<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte addr:</span> I2C
+address of this device.<br>
+<br>
+<big><span style="font-weight: bold;">int LL_SendCommand(byte port,
+byte addr, byte cmd)</span><br style="font-weight: bold;">
+</big><br>
+Functionality: Send a byte command to LineLeader<br>
+Parameters:<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte port:</span> Specify
+the NXT port this device is connected to.<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte addr:</span> I2C
+address of this device.<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte cmd: </span>the
+command byte.<br>
+<br>
+<big><span style="font-weight: bold;">int LL_Sleep(byte port, byte addr)</span></big><br>
+<br>
+Functionality: The LineLeader sensor can be put to sleep, so that it's
+not consuming power when it is not required.<br>
+It wakes up on it</font><font face="monospace">'s own when any i2c
+communication happens.&nbsp;&nbsp;Or you can specifically wake it up by
+'</font><font face="monospace">P' command.<br>
+Parameters:<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte port:</span> Specify
+the NXT port this device is connected to.<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte addr:</span> I2C
+address of this device.<br>
+<br>
+<big><span style="font-weight: bold;">int LL_TakeSnapshot(byte port,
+byte addr)</span></big><br>
+<br>
+Functionality: This function takes a snapshot of the line under the
+sensor and tracks that position in subsequent tracking operations.<br>
+Also this function will set inversion if it sees white line on dark
+background.<br>
+Parameters:<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte port:</span> Specify
+the NXT port this device is connected to.<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte addr:</span> I2C
+address of this device.<br>
+<br>
+<big style="font-weight: bold;">int LL_WakeUp(byte port, byte addr)</big><br>
+</font><font face="monospace"><br>
+Functionality: The LineLeader sensor can be put to sleep, so that it's
+not consuming power when it is not required.<br>
+It wakes up on it's own when any i2c communication
+happens.&nbsp;&nbsp;Or you can specifically wake it up by 'P' command.</font><font
+ face="monospace"><br>
+Parameters:<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte port: </span>Specify
+the NXT port this device is connected to.<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">byte addr: </span>I2C
+address of this device.<br>
+<br>
+<br>
+</font>
+</body>
+</html>

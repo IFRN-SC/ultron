@@ -1,0 +1,125 @@
+/************************************************************************/
+/*                                                                      */
+/* Program Name: LL-region.nxc */
+/* =============================                                        */
+/*                                                                      */
+/* Copyright (c) 2008 by mindsensors.com                                */
+/* Email: info (<at>) mindsensors (<dot>) com                           */
+/*                                                                      */
+/* This program is free software. You can redistribute it and/or modify */
+/* it under the terms of the GNU General Public License as published by */
+/* the Free Software Foundation; version 3 of the License.              */
+/* Read the license at: http://www.gnu.org/licenses/gpl.txt             */
+/*                                                                      */
+/************************************************************************/
+/*
+ * When        Who             Comments
+ * 03/16/09    Deepak Patil    Initial authoring.
+ */
+
+const byte SensorPort  =  IN_1;
+#define ADDR     0x02
+#include "LL-lib.nxc"
+
+
+task main ()
+{
+
+  string msg;
+	int region;
+	int stop_flag;
+	byte line_loc[10];
+	line_loc[0] = LCD_LINE4;
+	line_loc[1] = LCD_LINE5;
+	line_loc[2] = LCD_LINE6;
+
+	stop_flag = 0;
+
+  SetSensorLowspeed(SensorPort);
+
+	LL_WakeUp(SensorPort, ADDR);
+
+  Wait(10);
+	msg = " NXTLineLeader  ";
+	TextOut(0, LCD_LINE1, msg, false);
+	msg = "Attach to Port-1";
+	TextOut(0, LCD_LINE2, msg, false);
+	msg = "Select Region   ";
+	TextOut(0, LCD_LINE3, msg, false);
+	msg = "    Univrsal    ";
+	TextOut(0, LCD_LINE4, msg, false);
+	msg = "    US(60Hz)    ";
+	TextOut(0, LCD_LINE5, msg, false);
+	msg = "    EU(50Hz)    ";
+	TextOut(0, LCD_LINE6, msg, false);
+	
+	msg = "Press ORNGE btn ";
+	TextOut(0, LCD_LINE7, msg, false);
+	msg = "to continue.    ";
+	TextOut(0, LCD_LINE8, msg, false);
+
+  while (stop_flag == 0 ) {
+  
+    if ( ButtonPressed(BTNCENTER, true) ) {
+         while (ButtonPressed(BTNCENTER, true)) ;            //debounce the switch
+      stop_flag ++;
+    }
+    if ( ButtonPressed(BTNLEFT, true) ) {
+         while (ButtonPressed(BTNLEFT, true)) ;            //debounce the switch
+      if (region != 0 ) {
+        region--;
+      }
+    }
+    if (ButtonPressed(BTNRIGHT, true) ) {
+        while(ButtonPressed(BTNRIGHT, true));              //debounce the switch
+      if (region != 2 ) {
+        region++;
+      }
+    }
+
+	switch ( region ){
+	case 0:
+		TextOut(0,  line_loc[0], "***", false);
+		TextOut(75, line_loc[0], "***", false);
+		TextOut(0,  line_loc[1], "   ", false);
+		TextOut(75, line_loc[1], "   ", false);
+		TextOut(0,  line_loc[2], "   ", false);
+		TextOut(75, line_loc[2], "   ", false);
+		break;
+	case 1:
+		TextOut(0,  line_loc[0], "   ", false);
+		TextOut(75, line_loc[0], "   ", false);
+		TextOut(0,  line_loc[1], "***", false);
+		TextOut(75, line_loc[1], "***", false);
+		TextOut(0,  line_loc[2], "   ", false);
+		TextOut(75, line_loc[2], "   ", false);
+		break;
+	case 2:
+		TextOut(0,  line_loc[0], "   ", false);
+		TextOut(75, line_loc[0], "   ", false);
+		TextOut(0,  line_loc[1], "   ", false);
+		TextOut(75, line_loc[1], "   ", false);
+		TextOut(0,  line_loc[2], "***", false);
+		TextOut(75, line_loc[2], "***", false);
+	  break;
+	}
+
+  }// end of while
+	switch ( region ) {
+	case 0:
+		LL_SendCommand(SensorPort, ADDR, 'U');
+		break;
+	case 1:
+		LL_SendCommand(SensorPort, ADDR, 'A');
+		break;
+	case 2:
+		LL_SendCommand(SensorPort, ADDR, 'E');
+		break;
+	}
+	PlayTone(440, 30);
+	msg = "Please wait ....";
+	TextOut(0, LCD_LINE7, msg, false);
+	msg = "                ";
+	TextOut(0, LCD_LINE8, msg, false);
+	Wait (3000);
+}

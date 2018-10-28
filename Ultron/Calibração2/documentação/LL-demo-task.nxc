@@ -1,0 +1,115 @@
+/************************************************************************/
+/*                                                                      */
+/* Program Name: LL-demo-task.nxc */
+/* =============================                                        */
+/*                                                                      */
+/* Copyright (c) 2008 by mindsensors.com                                */
+/* Email: info (<at>) mindsensors (<dot>) com                           */
+/*                                                                      */
+/* This program is free software. You can redistribute it and/or modify */
+/* it under the terms of the GNU General Public License as published by */
+/* the Free Software Foundation; version 3 of the License.              */
+/* Read the license at: http://www.gnu.org/licenses/gpl.txt             */
+/*                                                                      */
+/************************************************************************/
+/*
+ * When        Who             Comments
+ * 03/16/09    Deepak Patil    Initial authoring.
+ */
+
+const byte SensorPort  =  IN_1;
+#define ADDR     0x02
+#include "LL-lib.nxc"
+
+char last_steering = 0;
+
+task RunAlongLine()
+{
+	char steering, result;
+	int c_speed, a_speed;
+
+  while (true ) {
+
+    steering = LL_ReadSteering(SensorPort, ADDR);
+
+		steering = steering / 2;
+		c_speed = 50 + steering;
+		a_speed = 50 - steering;
+
+		if ( c_speed > 100 ) c_speed = 100;
+		if ( a_speed > 100 ) a_speed = 100;
+		if ( c_speed < -100 ) c_speed = -100;
+		if ( a_speed < -100 ) a_speed = -100;
+
+		/*
+		// print line status
+		//
+		// WARNING: TextOut functions take too much CPU
+		// causing robot to behave sluggish
+		//
+    result = LL_Read(SensorPort, ADDR, LL_READ_RESULT);
+    msg = "bin:             ";
+    x = LL_format_bin(result);
+    msg = StrReplace(msg, 4, x);
+    TextOut(0, LCD_LINE1, msg, false);
+
+		// print power
+    msg = "p:               ";
+    x = NumToStr(c_speed);
+    msg = StrReplace(msg, 2, x);
+    x = NumToStr(a_speed);
+    msg = StrReplace(msg, 7, x);
+    TextOut(0, LCD_LINE2, msg, false);
+
+    msg = "steering:             ";
+    x = NumToStr(steering);
+    msg = StrReplace(msg, 10, x);
+    TextOut(0, LCD_LINE3, msg, false);
+		*/
+
+		//c_speed = c_speed /2;
+		//a_speed = a_speed /2;
+		OnFwdReg(OUT_A, a_speed, OUT_REGMODE_SPEED);
+		OnFwdReg(OUT_C, c_speed, OUT_REGMODE_SPEED);
+  }
+
+}
+
+task main ()
+{
+
+  string msg;
+  string x;
+	int s, i;
+
+  byte message[];
+  unsigned byte buf[20];
+  int count, l;
+  byte nByteReady = 0;
+
+  SetSensorLowspeed(SensorPort);
+  Wait(10);
+
+	/**
+	 * The following parameters (kp,ki,kd) are specific
+	 * to your robot. They will change based on robot design,
+	 * it's traction with mat, weight, wheel size, wheel spacing,
+	 * sensor distance from wheels, etc, etc.
+	 *
+	 * Tune them as best as you can for your robot.
+	 * Note, in general,  ki will be zero.
+	 *
+	 * If you wish to learn more about Kp, Ki, Kd, please
+	 * read the user guide.
+	 * An excellent explanation of PID is also offered at:
+	 * http://en.wikipedia.org/wiki/PID_controller
+	 *
+	 */
+
+	LL_Write_KP(SensorPort, ADDR, 25, 32);
+	LL_Write_KI(SensorPort, ADDR, 0, 200);
+	LL_Write_KD(SensorPort, ADDR, 8, 32);
+
+	StartTask (RunAlongLine);
+
+}
