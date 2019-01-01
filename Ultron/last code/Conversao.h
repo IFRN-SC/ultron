@@ -10,9 +10,11 @@ struct HSV {
   float h;
 };
 
+// CRIEI ESSE MÉTODO PARA COMPARAR A SATURAÇÃO DOS VALORES CALIBRADOS (RGB)
+// ONDE, CALCULO 20% DE SATURAÇÃO E VERIFICO SE O VALOR QUE TA DANDO ESTÁ ENTRE 
+// ESSA SATURAÇÃO DE 20% DA COR
 
-Manipulador saturacao_cor (RGB &cor)
-{
+Manipulador saturacao_cor (RGB &cor){
    Manipulador valor;
    valor.redMax   = cor.r + (cor.r * 0.20); 
    valor.redMin   = cor.r - (cor.r * 0.20); 
@@ -25,7 +27,8 @@ Manipulador saturacao_cor (RGB &cor)
    return valor;
 }
 
-
+// CRIEI UM MÉTODO PARA COMPARAR SE OS VALORE LIDOS ESTÃO 
+// DENTRO DOS 20% DE SATURAÇÃO
 bool contains (Manipulador &limite, RGB &cores){
    return 
    (cores.r > limite.redMin && cores.r < limite.redMax)     &&
@@ -33,7 +36,7 @@ bool contains (Manipulador &limite, RGB &cores){
    (cores.b > limite.blueMin && cores.b < limite.blueMax) ;
 }
 
-
+// LER OS VALORES EM RGB
 RGB lerSensorRGB (int porta){
    RGB valRetorno ;   
    valRetorno.r = ColorSensorValue (porta, INPUT_RED);
@@ -42,6 +45,7 @@ RGB lerSensorRGB (int porta){
    return valRetorno ; 
 }
 
+// MÉTODO PARA CONVERTER EM HSV
 HSV converter (RGB value){
    HSV valRetorno ; 
    float max = maximo (value.r, value.g, value.b);
