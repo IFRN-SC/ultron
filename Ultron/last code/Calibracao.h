@@ -2,8 +2,6 @@ char indentificadorZona;
 float brancoDir, pretoDir, cinzaDir;
 float brancoEsq, pretoEsq, cinzaEsq;
 
-
-
 void calibraRobo (){
    bool interromper = false;
    while (!interromper){
@@ -17,11 +15,10 @@ void calibraRobo (){
           if (ButtonPressed (BTN4, false)){
              brancoDir = sensorDir.v;
              brancoEsq = sensorEsq.v;
-	         calibrou ();
+	     calibrou ();
           }
      }
-     
-   
+        
      limparLCD ();
      while (!(ButtonPressed(BTN2, false))){
        texto("Preto todos");
@@ -35,33 +32,32 @@ void calibraRobo (){
           }
      }
 
+     // gambiara que deu certoo!  
+     // pois dava um bug no nxt, onde não lia o valores(RGB) do sensor   
+     if (true){
+         limparLCD ();
+         while (!(ButtonPressed(BTN2, false))){
+            texto("Direito verde");
+   	    RGB sensorDir = lerSensorRGB(SENSOR_DIR );
+   	    mostra3(sensorDir.r,sensorDir.g,sensorDir.b);
+	       if (ButtonPressed(BTN4, false)){
+		  ManipuladorDir = saturacao_cor(sensorDir);
+		  calibrou ();
+	       }
+	  }
 
-             if (true){
-
-                 limparLCD ();
-                 while (!(ButtonPressed(BTN2, false))){
-                   texto("Direito verde");
-   			       RGB sensorDir = lerSensorRGB(SENSOR_DIR );
-   	               mostra3(sensorDir.r,sensorDir.g,sensorDir.b);
-				     if (ButtonPressed (BTN4, false)){
-					    ManipuladorDir = saturacao_cor(sensorDir);
-				        calibrou ();
-					 }
-				 }
-
-                 limparLCD ();
-                 while (!(ButtonPressed(BTN2, false))){
-                   texto("Esquerdo verde");
-       			   RGB sensorEsq = lerSensorRGB(SENSOR_ESQ);
-			       mostra3(sensorEsq.r,sensorEsq.g,sensorEsq.b);
-				     if (ButtonPressed (BTN4, false)){
-				        ManipuladorEsq = saturacao_cor(sensorEsq);
-  			            calibrou ();
-					 }
-				 }
-             }
-
-
+          limparLCD ();
+          while (!(ButtonPressed(BTN2, false))){
+             texto("Esquerdo verde");
+       	     RGB sensorEsq = lerSensorRGB(SENSOR_ESQ);
+	     mostra3(sensorEsq.r,sensorEsq.g,sensorEsq.b);
+	         if (ButtonPressed (BTN4, false)){
+		    ManipuladorEsq = saturacao_cor(sensorEsq);
+  		    calibrou ();
+		  }
+          }
+     }
+    
      limparLCD ();
      while (!(ButtonPressed(BTN2, false))){
        texto("Cinza todos");
@@ -74,7 +70,6 @@ void calibraRobo (){
              calibrou ();
           }
      }
-
 
      limparLCD();
      while (!(ButtonPressed(BTN2, false))){
@@ -119,7 +114,6 @@ void calibraRobo (){
 }
 
 
-
 bool preto_direito (){
    HSV sensor = SensorDireito ();
    return (sensor.v < memoria.mediaDir);
@@ -155,8 +149,6 @@ bool verde_direito (){
    RGB sensorDir = lerSensorRGB(SENSOR_DIR);         
    return contains (ManipuladorDir, sensorDir);    
 }
-
-
 
 bool obstaculoEncontrado () {
    return (SONAR_FRE < DISTANCIA_OBSTA);
