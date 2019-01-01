@@ -1,0 +1,62 @@
+struct armazenar {
+   byte mediaDir, mediaEsq;
+   byte cinzaDir, cinzaEsq;  
+   byte zona;
+};
+armazenar memoria;
+
+
+struct Manipulador {
+   byte redMax, redMin;
+   byte greenMax, greenMin;
+   byte blueMax, blueMin;  
+};
+Manipulador ManipuladorDir;
+Manipulador ManipuladorEsq;
+
+
+
+#include "File.h"
+#include "Pinaguem.h"
+#include "Matematica.h"
+#include "Conversao.h"
+#include "Util.h"
+#include "Calibracao.h"
+#include "Estrategia.h"
+#include "Sala3.h"
+#include "Competir.h"
+
+task main (){ 
+    initComponents ();   
+  
+    while (true){
+       TextOut(10,50, " bobson <3");
+       TextOut(20,30, " iniciar  >");
+       TextOut(20,20, " calibrar <"); 
+       acionarMotores (0,0);
+
+       // ler os valores no arquivo txt ao iniciar
+       if (ButtonPressed(BTN2, false)){
+             ClearScreen ();
+             print (10, "Now...");
+             print ( 0, "are to begin!"); 
+             while (!(ButtonPressed(BTN4, false)));     
+             ClearScreen ();
+	         iniciarRobo ();
+             ClearScreen ();    
+       }       
+
+       // escrever os valores no arquivo txt
+       if (ButtonPressed(BTN3, false)){
+             DeleteFile ("banco.txt");
+             ClearScreen ();             
+             open_for_write();
+             calibraRobo(); 
+             write_recd (memoria);
+             write_rgb (ManipuladorDir);
+             write_rgb (ManipuladorEsq);
+             CloseFile(handle);
+             ClearScreen ();
+       }       
+    }    
+}
