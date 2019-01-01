@@ -31,7 +31,6 @@ void calibraRobo (){
              calibrou ();
           }
      }
-
      // gambiara que deu certoo!  
      // pois dava um bug no nxt, onde não lia o valores(RGB) do sensor   
      if (true){
