@@ -1,37 +1,41 @@
-void iniciarRobo (){
+void indentificaZona (char zona){
+  // zona direita
+  if (zona == 'd'){ zonaDireita(); break;} else 
+  // zona esquerda
+  if (zona == 'e'){ zonaEsquerda(); break;} else 
+  // zona bunda
+  if (zona == 'b'){ zonaBunda(); break;}     
+}
 
+
+void iniciarRobo (){
+      // ler os valores que estão escritos
+      // no arquivo txt na memoria permanente
       open_for_read ();
       read_media (memoria);
       read_rgb_dir (ManipuladorDir);
       read_rgb_dir (ManipuladorEsq);
 
           while (true){
-
                 // condição para sala 3 
                 if (salaEncontrada ()){
                     entrarSala ();         
-                    switch (memoria.zona){
-                      case 'd':
-                         zonaDireita ();
-                         break;
-                      case 'e':
-                         zonaEsquerda ();
-                         break; 
-                     default :
-                         zonaBunda ();   
-                    }
-                        break;
+                    // objeto memoria que possui os valores da calibração SALVOS!!! 
+                    indentificadorZona (memoria.zona);   
+                    break;
                 }
                 // condição para a rampa
                 else if (rampaEncontrada ()){
+                    // MINI SEGUIR LINHA NA RAMPA
                     subirRampa ();
                 }
                 // condição para o obstaculo
                 else if (obstaculoEncontrado ()) {
-                    alinharNoPreto ();
-                    desviarObstaculo ();
-                    encontrarLinha ();
+                    alinharNoPreto ();      // ROBO ALINHA NO PRETO
+                    desviarObstaculo ();    // ROBO DESVIA O OBSTACULO
+                    encontrarLinha ();      // ROBO ENCONTRA LINHA APÓS OBSTACULO
                 }
+                
                 // condições para o verde 
                 else if (verde_esquerdo()){
                     fazer_verde_esquerdo();
