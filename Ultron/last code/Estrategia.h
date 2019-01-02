@@ -3,6 +3,8 @@ void acionarMotores (int esquerdo, int direito){
    OnFwdReg (MOTOR_E, esquerdo, OUT_REGMODE_SPEED);
 }
 
+
+// SERÁ EXECUTADOR QUANDO OS DOIS SENSORES VIR VERDE
 void super_verde(){
    while (!(branco_direito() && preto_esquerdo())){
      acionarMotores (50, -50);  
@@ -14,6 +16,7 @@ void super_verde(){
    }
 } 
       
+// ENTRAR NA SALA 3
 void entrarSala (){
    acionarMotores (45,45);
    Wait (1000);
@@ -30,7 +33,6 @@ void parar (){
    Off (OUT_AC);
    Wait (700);
 }
-
 
 void subirRampa (){
    if (preto_esquerdo() && branco_direito()){
@@ -82,8 +84,6 @@ void fazer_verde_direito(){
    Wait (100);
 } 
  
-
-
 void desviarObstaculo (){
    acionarMotores (45, 45);
    Wait (2000);   
@@ -110,7 +110,6 @@ void encontrarLinha (){
      acionarMotores (45, 45);
    }
    Off(OUT_ABC); Wait (1500);
-
    while (!(branco_direito() && preto_esquerdo())){
      acionarMotores (20, -20);  
    }
