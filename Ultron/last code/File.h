@@ -2,6 +2,7 @@
 #define FILE_SIZE 1024          //tamanho do arquivo em bytes
 byte handle = 0;                // indentificador do arquivo
 
+
 //método responsável por para 
 //o código assim que necessário
 void shutdown(const int delay){
