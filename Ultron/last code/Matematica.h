@@ -17,7 +17,6 @@ float minimo (float num1, float num2, float num3){
     if ((num3 < num1)&&(num3 < num2)) return num3;
 }
 
-
 float calculeH (float maximo, float minimo, float red, float green, float blue){
     if ((maximo == red) && (green >= blue)){return (60 * (green - blue)/(maximo - minimo) + 0);} else 
     if ((maximo == red) && (green <  blue)){return (60 * (green - blue)/(maximo - minimo) + 360);} else 
