@@ -11,7 +11,7 @@
 #define SONAR_FRE SensorUS (IN_2)
 #define SONAR_LAT SensorUS (IN_3)
 
-#define DISTANCIA_OBSTA 7
+#define DISTANCIA_OBSTA 8
 #define DISTANCIA_RAMPA 15
 
 void initComponents (){
@@ -19,6 +19,9 @@ void initComponents (){
    SetSensorColorFull (S4);
    SetSensorLowspeed (IN_2);
    SetSensorLowspeed (IN_3);
+   //sempre que iniciar o código  é de extrema 
+   //importância fechar o arquio salvo na mémoria
    CloseFile(handle); 
 }
+
 #endif
