@@ -51,7 +51,7 @@ task main (){
              print ( 0, "are to begin!"); 
              while (!(ButtonPressed(BTN4, false)));     
              ClearScreen ();
-	         iniciarRobo ();
+	     iniciarRobo ();
              ClearScreen ();    
        }       
 
