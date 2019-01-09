@@ -2,7 +2,7 @@
 #define SALA3_H
 
 // queria muito ter feito, porém o nosso mecanico não
-// fez uma garra decente para isso :( 
+// fez uma garra para isso :( 
 
 void zonaDireita(){}
 void zonaEsquerda(){}
