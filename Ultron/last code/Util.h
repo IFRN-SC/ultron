@@ -4,19 +4,17 @@ void limparLCD (){
 }
 
 void calibrou (){
-   TextOut (0,40, "Calibrado");  
-   Wait (500);
+   TextOut (0,40, "Calibrado");  Wait (500);
    ClearScreen ();
 }
 
 void calibrouZona (){
-   TextOut (0,40, "Zona calibrada");  
-   Wait (500);
+   TextOut (0,40, "Zona calibrada"); Wait (500);
    ClearScreen ();
 }
 
 void print (int linha, string texto){
-   TextOut (0,linha, texto);
+   TextOut (0, linha, texto);
 }
 
 void texto (string nome){
