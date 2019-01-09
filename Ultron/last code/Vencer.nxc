@@ -1,3 +1,8 @@
+/* autor: Clemerson e Ruth
+ * Data: 20/08/18
+ * Local: IFRN- santa cruz
+ */ 
+
 struct armazenar {
    byte mediaDir, mediaEsq;
    byte cinzaDir, cinzaEsq;  
@@ -15,6 +20,7 @@ Manipulador ManipuladorDir;
 Manipulador ManipuladorEsq;
 
 
+// INCLUSÕES NECESSÁRIAS PARA A EXECUSSÃO DO CÓDIGO
 
 #include "File.h"
 #include "Pinaguem.h"
@@ -27,8 +33,9 @@ Manipulador ManipuladorEsq;
 #include "Competir.h"
 
 task main (){ 
+    // inicia os sensores
     initComponents ();   
-  
+    
     while (true){
        TextOut(10,50, " bobson <3");
        TextOut(20,30, " iniciar  >");
@@ -60,3 +67,7 @@ task main (){
        }       
     }    
 }
+
+// ENFIM...
+// CONSEGUIMOS O ESPERADO DURANTE O SEMESTRE COMO ULTILIZAR O SENSOR DE COR
+// FAZER O VERDE E SALVAR A CALIBRAÇÃO NA MÉMORIA, PORÉM FALTOU A SALA 3 :(
