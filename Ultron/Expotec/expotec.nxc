@@ -16,8 +16,6 @@ Calib c ;
 #include "movimentos.h"
 #include "competicao.h"
 
- 
-
 task main()
 {
   SetSensorColorFull (S1);
